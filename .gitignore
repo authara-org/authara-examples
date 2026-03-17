@@ -1,0 +1,95 @@
+# =========================
+# Environment / secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Go
+# =========================
+bin/
+build/
+dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+coverage.out
+coverage.html
+
+# Go workspace
+go.work
+go.work.sum
+
+# =========================
+# Node / React
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# React / frontend builds
+dist/
+build/
+.next/
+out/
+coverage/
+
+# =========================
+# HTMX / frontend assets
+# =========================
+public/build/
+assets/
+.tmp/
+
+# =========================
+# Docker
+# =========================
+.docker/
+docker-data/
+docker-compose.override.yml
+
+# =========================
+# Database / volumes
+# =========================
+postgres-data/
+*.db
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# OS
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Editors
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# Temporary files
+# =========================
+tmp/
+temp/
+.cache/
+
+# =========================
+# Test artifacts
+# =========================
+*.coverprofile
+coverage/

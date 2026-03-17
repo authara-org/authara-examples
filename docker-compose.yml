@@ -1,41 +1,57 @@
-
-version: "3.9"
-
 services:
   gateway:
-    image: yourorg/authgate-gateway:latest
+    image: ghcr.io/authara-org/authara-gateway:1.2.0
     ports:
-      - "80:80"
+      - "3000:3000"
+    environment:
+      GATEWAY_BIND: :3000
+      AUTHARA_UPSTREAM: authara:8080
+      APP_UPSTREAM: testapp:8080
+    depends_on:
+      - authara
+      - testapp
+
+  authara-migrations:
+    image: ghcr.io/authara-org/authara-migrations:v0.1.0
     env_file: .env
     depends_on:
-      - auth
-      - app
+      postgres:
+        condition: service_healthy
+    command: ["up", "-env=default", "-config=dbconfig.yaml"]
+    restart: "no"
 
-  auth:
-    image: yourorg/authgate:latest
-    environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/authgate
-      BASE_PATH: /auth
-      PUBLIC_URL: http://localhost
-      SESSION_TTL: 24h
-      COOKIE_NAME: authgate_session
-      COOKIE_SECURE: "false"
+  authara:
+    image: ghcr.io/authara-org/authara-core:v0.1.2
+    env_file:
+      - .env
     depends_on:
-      - db
+      authara-migrations:
+        condition: service_completed_successfully
 
-  db:
-    image: postgres:16
+  postgres:
+    image: postgres:16.2
+    restart: always
     environment:
-      POSTGRES_DB: authgate
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${POSTGRESQL_DATABASE}
+      POSTGRES_USER: ${POSTGRESQL_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+    healthcheck:
+      test: "/usr/bin/pg_isready --dbname=${POSTGRESQL_DATABASE} --username=${POSTGRESQL_USERNAME} || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
-      - authgate-db:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
 
-  app:
-    image: nginx:alpine
-    volumes:
-      - ./app:/usr/share/nginx/html:ro
+  testapp:
+    build:
+      context: ./go+htmx/
+    environment:
+      AUTHARA_ISSUER: authara
+      AUTHARA_AUDIENCE: app
+      AUTHARA_BASE_URL: http://authara:8080
+      AUTHARA_JWT_ACTIVE_KEY_ID: ${AUTHARA_JWT_ACTIVE_KEY_ID}
+      AUTHARA_JWT_KEYS: ${AUTHARA_JWT_KEYS}
 
 volumes:
-  authgate-db:
+  postgres-data:

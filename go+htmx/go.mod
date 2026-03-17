@@ -1,0 +1,13 @@
+module testapp
+
+go 1.25
+
+require (
+	github.com/authara-org/authara-go v0.5.0
+	github.com/go-chi/chi/v5 v5.2.5
+)
+
+require (
+	github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
+	github.com/google/uuid v1.6.0 // indirect
+)
