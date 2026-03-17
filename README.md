@@ -1,117 +1,79 @@
-# Authgate Starter
+# Authara Starter
 
-This repository lets you run **Authgate** locally in minutes using Docker.
+Minimal starter project demonstrating how to integrate an application with **Authara**.
 
-It includes:
-- Authgate (authentication service)
-- A gateway (Caddy) that routes `/auth/*`
-- PostgreSQL for user storage
-- A placeholder application
+Includes a small example application built with **Go + HTMX** running behind the **Authara Gateway**.
 
-You do **not** need to write any authentication code to get started.
+## Stack
 
----
-
-## Requirements
-
+- Go
+- HTMX
+- Chi router
 - Docker
-- Docker Compose
-
----
+- PostgreSQL
+- Authara
 
 ## Quickstart
 
 Clone the repository:
 
-    git clone https://github.com/yourorg/authgate-starter
+```bash
+git clone https://github.com/authara-org/authara-starter
+cd authara-starter
+```
 
-Enter the directory:
+Create the environment file:
 
-    cd authgate-starter
+```bash
+cp .env.example .env
+```
 
-Create your environment file:
+Start the stack:
 
-    cp .env.example .env
+```bash
+docker compose up --build
+```
 
-Start everything:
+Open the app:
 
-    docker compose up
+```
+http://localhost:3000
+```
 
----
+## What this example shows
 
-## Open in your browser
+- Public homepage
+- Login with Authara
+- Protected `/private` page
+- Logout flow
+- Link to `/auth/account`
 
-Main application:
+The example app uses the **Authara Go SDK** to fetch the current user.
 
-    http://localhost
+## Project structure
 
-Authgate login page:
+```
+authara-starter
+│
+├─ docker-compose.yml
+├─ .env.example
+│
+├─ go+htmx
+│   ├─ main.go
+│   ├─ handlers/
+│   └─ Dockerfile
+```
 
-    http://localhost/auth/login
+## Learn more
 
----
+Authara documentation  
+https://docs.authara.org
 
-## How it works
+Authara repository  
+https://github.com/authara-org/authara
 
-- Requests to `/auth/*` are handled by **Authgate**
-- Requests to `/` are handled by your application
-- Authgate manages users, sessions, and cookies
-- Your app only validates incoming requests
-
----
-
-## Integrating Authgate into your app
-
-Protect routes using the Authgate SDK.
-
-Example (Go):
-
-    app.Use(authgate.RequireAuth)
-
-Unauthenticated users are automatically redirected to:
-
-    /auth/login
-
----
-
-## Customizing
-
-You can:
-
-- Replace the `app` service with your real backend
-- Change database credentials
-- Replace the gateway with Nginx or Traefik
-
-Authgate works with **any backend language**.
-
----
-
-## Production notes
-
-Before deploying to production:
-
-- Use a real domain (not `localhost`)
-- Enable HTTPS (Caddy does this automatically)
-- Set `COOKIE_SECURE=true`
-
----
-
-## Authgate v1 scope
-
-Included:
-- Email + password authentication
-- Hosted authentication UI
-- Session-based cookies
-- Redirect-based login flow
-- Self-hosted deployment
-
-Not included (v1):
-- OAuth / OIDC
-- Social login
-- MFA / passkeys
-- Multi-tenancy
-
----
+Authara Go SDK  
+https://github.com/authara-org/authara-go
 
 ## License
 
