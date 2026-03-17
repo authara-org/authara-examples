@@ -1,6 +1,6 @@
-# Authara Starter
+# Authara Examples
 
-Minimal starter project demonstrating how to integrate an application with **Authara**.
+Example applications demonstrating how to integrate Authara authentication.
 
 Includes a small example application built with **Go + HTMX** running behind the **Authara Gateway**.
 
