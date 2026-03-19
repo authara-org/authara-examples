@@ -45,7 +45,8 @@ services:
 
   testapp:
     build:
-      context: ./go+htmx/
+      # context: ./go+htmx/
+      context: ./go+react/
     environment:
       AUTHARA_ISSUER: authara
       AUTHARA_AUDIENCE: app
