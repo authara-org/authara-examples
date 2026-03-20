@@ -1,5 +1,5 @@
-github.com/authara-org/authara-go v0.5.0 h1:VXPYjImufG0g9dsLQs3RYGg2VjQP2jj5srmqG4yH7vM=
-github.com/authara-org/authara-go v0.5.0/go.mod h1:hMtCvjNiHGxR8jLvfijthjPnUHRofs710coSsWZgSUc=
+github.com/authara-org/authara-go v0.6.2 h1:XAIngl/ptvnqbH8lntJbJ/pnwJA+fwdu78y7Xda9P18=
+github.com/authara-org/authara-go v0.6.2/go.mod h1:hMtCvjNiHGxR8jLvfijthjPnUHRofs710coSsWZgSUc=
 github.com/go-chi/chi/v5 v5.2.5 h1:Eg4myHZBjyvJmAFjFvWgrqDTXFyOzjj7YIm3L3mu6Ug=
 github.com/go-chi/chi/v5 v5.2.5/go.mod h1:X7Gx4mteadT3eDOMTsXzmI4/rwUpOwBHLpAfupzFJP0=
 github.com/golang-jwt/jwt/v5 v5.2.1 h1:OuVbFODueb089Lh128TAcimifWaLhJwVflnrgM17wHk=
