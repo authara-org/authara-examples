@@ -21,7 +21,7 @@ services:
     restart: "no"
 
   authara:
-    image: ghcr.io/authara-org/authara-core:v0.1.2
+    image: ghcr.io/authara-org/authara-core:v0.1.3
     env_file:
       - .env
     depends_on:
@@ -45,14 +45,14 @@ services:
 
   testapp:
     build:
-      # context: ./go+htmx/
-      context: ./go+react/
+      context: ./go+htmx/
+      # context: ./go+react/
     environment:
-      AUTHARA_ISSUER: authara
       AUTHARA_AUDIENCE: app
       AUTHARA_BASE_URL: http://authara:8080
-      AUTHARA_JWT_ACTIVE_KEY_ID: ${AUTHARA_JWT_ACTIVE_KEY_ID}
+      AUTHARA_ISSUER: ${AUTHARA_ISSUER}
       AUTHARA_JWT_KEYS: ${AUTHARA_JWT_KEYS}
+      AUTHARA_WEBHOOK_SECRET: ${AUTHARA_WEBHOOK_SECRET}
 
 volumes:
   postgres-data:
