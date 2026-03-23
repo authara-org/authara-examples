@@ -1,6 +1,6 @@
 services:
   gateway:
-    image: ghcr.io/authara-org/authara-gateway:1.2.0
+    image: ghcr.io/authara-org/authara-gateway:latest
     ports:
       - "3000:3000"
     environment:
@@ -12,7 +12,7 @@ services:
       - testapp
 
   authara-migrations:
-    image: ghcr.io/authara-org/authara-migrations:v0.1.0
+    image: ghcr.io/authara-org/authara-migrations:latest
     env_file: .env
     depends_on:
       postgres:
@@ -21,7 +21,7 @@ services:
     restart: "no"
 
   authara:
-    image: ghcr.io/authara-org/authara-core:v0.1.4
+    image: ghcr.io/authara-org/authara-core:latest
     env_file:
       - .env
     depends_on:
