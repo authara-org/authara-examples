@@ -16,9 +16,15 @@ RUN go mod download
 COPY . .
 COPY --from=frontend-builder /app/dist ./web/dist
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /out/testapp ./main.go
+ARG TARGETOS
+ARG TARGETARCH
 
-FROM gcr.io/distroless/base-debian12
+RUN CGO_ENABLED=0 \
+  GOOS=$TARGETOS \
+  GOARCH=$TARGETARCH \
+  go build -o /out/testapp ./main.go
+
+FROM --platform=$TARGETOS/$TARGETARCH gcr.io/distroless/base-debian12
 WORKDIR /app
 
 COPY --from=backend-builder /out/testapp /app/testapp

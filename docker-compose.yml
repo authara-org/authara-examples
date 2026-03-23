@@ -21,7 +21,7 @@ services:
     restart: "no"
 
   authara:
-    image: ghcr.io/authara-org/authara-core:v0.1.3
+    image: ghcr.io/authara-org/authara-core:v0.1.4
     env_file:
       - .env
     depends_on:
@@ -50,7 +50,7 @@ services:
     environment:
       AUTHARA_AUDIENCE: app
       AUTHARA_BASE_URL: http://authara:8080
-      AUTHARA_ISSUER: ${AUTHARA_ISSUER}
+      AUTHARA_ISSUER: ${AUTHARA_JWT_ISSUER}
       AUTHARA_JWT_KEYS: ${AUTHARA_JWT_KEYS}
       AUTHARA_WEBHOOK_SECRET: ${AUTHARA_WEBHOOK_SECRET}
 
