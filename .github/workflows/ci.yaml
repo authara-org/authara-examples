@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+
+      - name: Test Go + HTMX example
+        working-directory: go+htmx
+        run: go test ./...
+
+      - name: Test Go + React backend
+        working-directory: go+react
+        run: go test ./...
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+
+      - name: Install React example dependencies
+        working-directory: go+react/web
+        run: npm install
+
+      - name: Build React example
+        working-directory: go+react/web
+        run: npm run build
