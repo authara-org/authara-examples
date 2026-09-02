@@ -1,4 +1,6 @@
-import { authFetch, logout } from "@authara/browser";
+import { AutharaBrowserClient, authFetch } from "@authara/browser";
+
+const authara = new AutharaBrowserClient();
 
 export async function getCurrentUser() {
 	const res = await authFetch("/api/me");
@@ -15,5 +17,6 @@ export async function getCurrentUser() {
 }
 
 export async function logoutAndRedirect() {
-	await logout({ redirectTo: "/" });
+	await authara.logout();
+	window.location.assign("/");
 }
