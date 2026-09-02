@@ -36,7 +36,7 @@ jobs:
 
       - name: Install React example dependencies
         working-directory: go+react/web
-        run: npm install
+        run: npm ci
 
       - name: Build React example
         working-directory: go+react/web
