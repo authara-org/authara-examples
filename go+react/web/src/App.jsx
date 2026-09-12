@@ -12,7 +12,7 @@ export default function App() {
 
 	const isPrivate = window.location.pathname === "/private";
 
-	const loginURL = "/auth/login?return_to=/private";
+	const loginURL = "/auth/login";
 
 	if (user === undefined) {
 		return (
