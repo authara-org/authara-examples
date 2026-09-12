@@ -43,7 +43,7 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 
 	data := HomeData{
 		LoggedIn: user != nil,
-		LoginURL: "/auth/login?return_to=/private",
+		LoginURL: "/auth/login",
 	}
 	if user != nil {
 		data.Username = user.Username
@@ -62,16 +62,13 @@ func (h *Handler) Private(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if user == nil {
-		http.Redirect(w, r, "/auth/login?return_to=/private", http.StatusSeeOther)
+		http.Redirect(w, r, "/auth/login", http.StatusSeeOther)
 		return
 	}
 
-	logout, ok := authara.LogoutFormDataFromRequest(
-		r,
-		"/auth/login?return_to=/private",
-	)
+	logout, ok := authara.LogoutFormDataFromRequest(r, "")
 	if !ok {
-		http.Redirect(w, r, "/auth/login?return_to=/private", http.StatusSeeOther)
+		http.Redirect(w, r, "/auth/login", http.StatusSeeOther)
 		return
 	}
 
@@ -95,7 +92,7 @@ func (h *Handler) PrivatePulse(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if user == nil {
-		http.Redirect(w, r, "/auth/login?return_to=/private", http.StatusSeeOther)
+		http.Redirect(w, r, "/auth/login", http.StatusSeeOther)
 		return
 	}
 
