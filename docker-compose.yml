@@ -1,6 +1,6 @@
 services:
   gateway:
-    image: ghcr.io/authara-org/authara-gateway:latest
+    image: ghcr.io/authara-org/authara-gateway:v1.2.2
     ports:
       - "3000:3000"
     environment:
@@ -14,7 +14,7 @@ services:
         condition: service_started
 
   authara-migrations:
-    image: ghcr.io/authara-org/authara-migrations:latest
+    image: ghcr.io/authara-org/authara-migrations:v0.2.0
     env_file: .env
     depends_on:
       postgres:
@@ -23,7 +23,7 @@ services:
     restart: "no"
 
   authara:
-    image: ghcr.io/authara-org/authara-core:latest
+    image: ghcr.io/authara-org/authara-core:v0.23.0
     env_file:
       - .env
     depends_on:
@@ -47,14 +47,12 @@ services:
 
   testapp:
     build:
-      context: ./go+htmx/
-      # context: ./go+react/
+      context: ./${AUTHARA_EXAMPLE:-go+htmx}/
     environment:
       AUTHARA_AUDIENCE: app
       AUTHARA_BASE_URL: http://authara:8080
       AUTHARA_ISSUER: ${AUTHARA_JWT_ISSUER}
       AUTHARA_JWT_KEYS: ${AUTHARA_JWT_KEYS}
-      AUTHARA_WEBHOOK_SECRET: ${AUTHARA_WEBHOOK_SECRET}
 
 volumes:
   postgres-data:
