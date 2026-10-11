@@ -4,15 +4,17 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"build": "vite build"
+		"build": "vite build",
+		"dev": "vite --host 0.0.0.0"
 	},
 	"dependencies": {
-		"@authara/browser": "^0.4.0",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1"
+		"@authara/browser": "^0.11.0",
+		"@authara/react": "^0.2.0",
+		"react": "^19.3.0",
+		"react-dom": "^19.3.0"
 	},
 	"devDependencies": {
-		"@vitejs/plugin-react": "^4.3.1",
-		"vite": "^5.4.10"
+		"@vitejs/plugin-react": "^6.1.2",
+		"vite": "^8.3.4"
 	}
 }

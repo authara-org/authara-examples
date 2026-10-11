@@ -1,8 +1,8 @@
-FROM node:20-alpine AS frontend-builder
+FROM node:24-alpine AS frontend-builder
 WORKDIR /app
 
-COPY web/package.json web/package-lock.json* ./
-RUN npm install
+COPY web/package.json web/package-lock.json ./
+RUN npm ci
 
 COPY web .
 RUN npm run build
@@ -24,7 +24,7 @@ RUN CGO_ENABLED=0 \
   GOARCH=$TARGETARCH \
   go build -o /out/testapp ./main.go
 
-FROM --platform=$TARGETOS/$TARGETARCH gcr.io/distroless/base-debian12
+FROM gcr.io/distroless/base-debian12
 WORKDIR /app
 
 COPY --from=backend-builder /out/testapp /app/testapp
