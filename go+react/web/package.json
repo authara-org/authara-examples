@@ -8,8 +8,8 @@
 		"dev": "vite --host 0.0.0.0"
 	},
 	"dependencies": {
-		"@authara/browser": "^0.10.0",
-		"@authara/react": "^0.1.0",
+		"@authara/browser": "^0.11.0",
+		"@authara/react": "^0.2.0",
 		"react": "^19.3.0",
 		"react-dom": "^19.3.0"
 	},

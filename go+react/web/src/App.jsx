@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { AppleButton, GoogleButton } from "@authara/react";
+import { AppleButton, GoogleButton, MicrosoftButton } from "@authara/react";
 import {
   authara,
   errorMessage,
@@ -34,6 +34,14 @@ function ProviderButtons({ label = "sign-in", onAuthenticated, onError }) {
         onError={onError}
       />
       <AppleButton
+        action="login"
+        audience="app"
+        label={label}
+        mode="system"
+        onSuccess={onAuthenticated}
+        onError={onError}
+      />
+      <MicrosoftButton
         action="login"
         audience="app"
         label={label}
@@ -101,6 +109,16 @@ function Recovery({ recovery, onAuthenticated, onCancel }) {
         )}
         {methods.has("apple") && (
           <AppleButton
+            action="recover"
+            audience="app"
+            recoveryLinkId={recovery.link_id}
+            mode="system"
+            onSuccess={onAuthenticated}
+            onError={(providerError) => setError(errorMessage(providerError))}
+          />
+        )}
+        {methods.has("microsoft") && (
+          <MicrosoftButton
             action="recover"
             audience="app"
             recoveryLinkId={recovery.link_id}
@@ -357,6 +375,15 @@ function Reauthentication({ account, challengeID, onComplete, onCancel, onError 
             onError={onError}
           />
         )}
+        {methods.has("microsoft") && (
+          <MicrosoftButton
+            action="reauthenticate"
+            authenticationChallengeId={challengeID}
+            mode="system"
+            onSuccess={onComplete}
+            onError={onError}
+          />
+        )}
       </div>
       <button className="text-button" type="button" onClick={onCancel}>Cancel</button>
     </section>
@@ -484,7 +511,7 @@ function AccountPage({ user, onUserChanged, onLogout }) {
             ))}
           </ul>
 
-          {(!providers.has("google") || !providers.has("apple")) && (
+          {(!providers.has("google") || !providers.has("apple") || !providers.has("microsoft")) && (
             <div className="provider-buttons">
               {!providers.has("google") && (
                 <GoogleButton
@@ -499,6 +526,14 @@ function AccountPage({ user, onUserChanged, onLogout }) {
                   action="link"
                   mode="system"
                   onSuccess={() => loadAccount().then(() => setNotice("Apple linked."))}
+                  onError={(requestError) => handleError(requestError)}
+                />
+              )}
+              {!providers.has("microsoft") && (
+                <MicrosoftButton
+                  action="link"
+                  mode="system"
+                  onSuccess={() => loadAccount().then(() => setNotice("Microsoft linked."))}
                   onError={(requestError) => handleError(requestError)}
                 />
               )}
