@@ -23,7 +23,7 @@ services:
     restart: "no"
 
   authara:
-    image: ghcr.io/authara-org/authara-core:v0.24.0
+    image: ghcr.io/authara-org/authara-core:v0.25.0
     env_file:
       - .env
     depends_on:
@@ -52,7 +52,6 @@ services:
       AUTHARA_AUDIENCE: app
       AUTHARA_BASE_URL: http://authara:8080
       AUTHARA_ISSUER: ${AUTHARA_JWT_ISSUER}
-      AUTHARA_JWT_KEYS: ${AUTHARA_JWT_KEYS}
 
 volumes:
   postgres-data:

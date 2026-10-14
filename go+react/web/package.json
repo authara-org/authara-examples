@@ -9,7 +9,7 @@
 	},
 	"dependencies": {
 		"@authara/browser": "^0.11.0",
-		"@authara/react": "^0.2.0",
+		"@authara/react": "^0.3.0",
 		"react": "^19.3.0",
 		"react-dom": "^19.3.0"
 	},
