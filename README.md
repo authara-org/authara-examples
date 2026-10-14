@@ -5,7 +5,7 @@ Two small Go applications show the two supported browser-integration styles.
 - **Go + HTMX:** Authara owns the hosted login, signup, and account UI. The app only protects its own pages with `authara-go` and renders a CSRF-safe logout form.
 - **Go + React:** React owns the authentication and account UI. It uses the generated `@authara/browser` client, `@authara/react` Google, Apple, and Microsoft buttons, and a Go API protected by `authara-go`.
 
-The stack pins Authara Core `v0.24.0`, migrations `v0.3.0`, Gateway `v1.2.2`, Go SDK `v0.20.0`, Browser SDK `v0.11.0`, and React components `v0.2.0`.
+The stack pins Authara Core `v0.25.0`, migrations `v0.3.0`, Gateway `v1.2.2`, Go SDK `v0.21.0`, Browser SDK `v0.11.0`, and React components `v0.3.0`.
 
 ## Run an example
 
